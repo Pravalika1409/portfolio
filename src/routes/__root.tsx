@@ -30,14 +30,18 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Pravalika Oruganti — Software Developer" },
-      { name: "description", content: "Full-Stack Software Developer specializing in React, Node.js, TypeScript and .NET." },
+      { title: "Pravalika Oruganti - Software Developer" },
+      { name: "description", content: "Pravalika" },
       { name: "author", content: "Pravalika Oruganti" },
-      { property: "og:title", content: "Pravalika Oruganti — Software Developer" },
-      { property: "og:description", content: "Full-Stack Software Developer specializing in React, Node.js, TypeScript and .NET." },
+      { property: "og:title", content: "Pravalika Oruganti - Software Developer" },
+      { property: "og:description", content: "Pravalika" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "Pravalika Oruganti - Software Developer" },
+      { name: "twitter:description", content: "Pravalika" },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/fefYbUuUdFXIbhT8FHtRHg0cQZl2/social-images/social-1777572970244-IMG_1893.webp" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/fefYbUuUdFXIbhT8FHtRHg0cQZl2/social-images/social-1777572970244-IMG_1893.webp" },
     ],
     links: [
       {
