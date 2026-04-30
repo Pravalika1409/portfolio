@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import profile from "@/assets/profile.jpg";
+import { useState } from "react";
 import {
   Github,
   Linkedin,
@@ -18,7 +19,11 @@ import {
   Trophy,
   Send,
   ExternalLink,
+  FolderGit2,
+  Loader2,
 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 export const Route = createFileRoute("/")({
   head: () => ({
