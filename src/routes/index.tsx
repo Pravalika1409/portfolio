@@ -54,8 +54,44 @@ const NAV = [
   { label: "About", href: "#about" },
   { label: "Resume", href: "#resume" },
   { label: "Services", href: "#services" },
+  { label: "Projects", href: "#projects" },
   { label: "Skills", href: "#skills" },
   { label: "Contact", href: "#contact" },
+];
+
+const PROJECTS = [
+  {
+    title: "Elderly Care Portal",
+    description:
+      "A compassionate care management platform for elderly patients — appointment tracking, caregiver coordination, and family updates in one place.",
+    tags: ["React", "TypeScript", "Tailwind", "Vercel"],
+    href: "https://elderly-care-portal.vercel.app/",
+    accent: "neon",
+  },
+  {
+    title: "Travel Experience",
+    description:
+      "An immersive travel discovery app — curated destinations, itineraries and a clean, content-rich UI built for inspiration.",
+    tags: ["React", "Vite", "Tailwind", "Lovable"],
+    href: "https://travelexp.lovable.app",
+    accent: "pink",
+  },
+  {
+    title: "More project — coming soon",
+    description:
+      "Another full-stack project. I'll wire the live link and details here shortly.",
+    tags: ["React", "Node.js", "REST API"],
+    href: "#",
+    accent: "yellow",
+  },
+  {
+    title: "More project — coming soon",
+    description:
+      "Another full-stack project. I'll wire the live link and details here shortly.",
+    tags: ["TypeScript", ".NET", "SQL"],
+    href: "#",
+    accent: "neon",
+  },
 ];
 
 const STATS = [
@@ -170,6 +206,7 @@ function Portfolio() {
         <Services />
         <Experience />
         <Education />
+        <Projects />
         <Skills />
         <Contact />
       </main>
