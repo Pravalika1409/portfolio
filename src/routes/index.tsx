@@ -573,7 +573,121 @@ function SkillGroup({ title, items }: { title: string; items: string }) {
   );
 }
 
+function Projects() {
+  return (
+    <section id="projects">
+      <SectionHeader
+        tag="projects"
+        title={
+          <>
+            Selected <span className="text-neon">projects</span> I&apos;ve shipped
+          </>
+        }
+      />
+      <div className="grid md:grid-cols-2 gap-5">
+        {PROJECTS.map((p, i) => {
+          const isLive = p.href.startsWith("http");
+          const accentClass =
+            p.accent === "pink"
+              ? "text-pink"
+              : p.accent === "yellow"
+              ? "text-yellow"
+              : "text-neon";
+          return (
+            <a
+              key={i}
+              href={isLive ? p.href : undefined}
+              target={isLive ? "_blank" : undefined}
+              rel="noreferrer"
+              className={`group relative rounded-xl border border-border bg-card p-6 transition hover:-translate-y-1 ${
+                isLive ? "hover:border-neon cursor-pointer" : "opacity-80"
+              }`}
+            >
+              <div className="flex items-start justify-between gap-4 mb-4">
+                <div className="grid place-items-center size-10 rounded-md bg-secondary">
+                  <FolderGit2 className={`size-5 ${accentClass}`} />
+                </div>
+                {isLive ? (
+                  <span className="inline-flex items-center gap-1 text-xs text-muted-foreground group-hover:text-neon transition">
+                    Live <ExternalLink className="size-3" />
+                  </span>
+                ) : (
+                  <span className="text-xs text-muted-foreground">soon</span>
+                )}
+              </div>
+              <h3 className="text-lg font-semibold text-foreground mb-2">
+                {p.title}
+              </h3>
+              <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+                {p.description}
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {p.tags.map((t) => (
+                  <span
+                    key={t}
+                    className="text-[11px] font-mono px-2 py-1 rounded border border-border text-muted-foreground"
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </a>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
 function Contact() {
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (loading) return;
+
+    const name = form.name.trim();
+    const email = form.email.trim();
+    const subject = form.subject.trim();
+    const message = form.message.trim();
+
+    if (!name || !email || !message) {
+      toast.error("Please fill in your name, email and message.");
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      toast.error("Please enter a valid email address.");
+      return;
+    }
+    if (name.length > 100 || email.length > 255 || message.length > 5000) {
+      toast.error("Some fields are too long.");
+      return;
+    }
+
+    setLoading(true);
+    const { error } = await supabase.from("contact_submissions").insert({
+      name,
+      email,
+      subject: subject || null,
+      message,
+    });
+    setLoading(false);
+
+    if (error) {
+      toast.error("Could not send your message. Please try again.");
+      return;
+    }
+
+    toast.success("Message sent! I'll get back to you soon.");
+    setForm({ name: "", email: "", subject: "", message: "" });
+  };
+
   return (
     <section id="contact">
       <SectionHeader
@@ -585,7 +699,7 @@ function Contact() {
           </>
         }
       />
-      <div className="grid lg:grid-cols-3 gap-4">
+      <div className="grid lg:grid-cols-3 gap-4 mb-6">
         <ContactCard
           Icon={Mail}
           label="Email"
@@ -606,27 +720,133 @@ function Contact() {
         />
       </div>
 
-      <div className="mt-6 rounded-xl border border-border bg-card p-6 sm:p-8 flex flex-wrap items-center justify-between gap-4">
-        <div className="flex items-center gap-4">
-          <MapPin className="size-5 text-neon" />
+      <div className="grid lg:grid-cols-5 gap-6">
+        <div className="lg:col-span-2 rounded-xl border border-border bg-card p-6 sm:p-8 flex flex-col justify-between">
           <div>
-            <p className="font-semibold text-foreground">
-              Open to opportunities — Canada & remote
-            </p>
-            <p className="text-sm text-muted-foreground">
-              I&apos;m excited to take on new projects and collaborate with great teams.
+            <div className="flex items-center gap-3 mb-4">
+              <MapPin className="size-5 text-neon" />
+              <p className="font-semibold text-foreground">
+                Open to opportunities — Canada & remote
+              </p>
+            </div>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              I&apos;m excited to take on new projects and collaborate with great
+              teams. Drop me a message and I&apos;ll respond within a day or two.
             </p>
           </div>
+          <div className="mt-6 font-mono text-xs text-muted-foreground space-y-1">
+            <div>
+              <span className="text-pink">const</span>{" "}
+              <span className="text-neon">response_time</span> ={" "}
+              <span className="text-yellow">&quot;~24h&quot;</span>;
+            </div>
+            <div>
+              <span className="text-pink">const</span>{" "}
+              <span className="text-neon">timezone</span> ={" "}
+              <span className="text-yellow">&quot;EST / America/Toronto&quot;</span>;
+            </div>
+          </div>
         </div>
-        <a
-          href="mailto:Pravalikaoruganti.hsm@gmail.com"
-          className="inline-flex items-center gap-2 px-5 py-3 rounded-md bg-neon text-neon-foreground font-medium hover:opacity-90 transition glow-neon"
+
+        <form
+          onSubmit={handleSubmit}
+          className="lg:col-span-3 rounded-xl border border-border bg-card p-6 sm:p-8 space-y-4"
         >
-          <Send className="size-4" />
-          Send a message
-        </a>
+          <div className="grid sm:grid-cols-2 gap-4">
+            <Field
+              label="Name"
+              required
+              value={form.name}
+              onChange={(v) => setForm((f) => ({ ...f, name: v }))}
+              placeholder="Your name"
+              maxLength={100}
+            />
+            <Field
+              label="Email"
+              required
+              type="email"
+              value={form.email}
+              onChange={(v) => setForm((f) => ({ ...f, email: v }))}
+              placeholder="you@example.com"
+              maxLength={255}
+            />
+          </div>
+          <Field
+            label="Subject"
+            value={form.subject}
+            onChange={(v) => setForm((f) => ({ ...f, subject: v }))}
+            placeholder="What's this about?"
+            maxLength={200}
+          />
+          <div>
+            <label className="block text-xs uppercase tracking-widest text-neon mb-2">
+              // Message <span className="text-pink">*</span>
+            </label>
+            <textarea
+              required
+              value={form.message}
+              onChange={(e) =>
+                setForm((f) => ({ ...f, message: e.target.value }))
+              }
+              maxLength={5000}
+              rows={6}
+              placeholder="Tell me about your project, role or idea..."
+              className="w-full rounded-md bg-background border border-border px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-neon transition resize-none"
+            />
+          </div>
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-md bg-neon text-neon-foreground font-medium hover:opacity-90 transition glow-neon disabled:opacity-60 disabled:cursor-not-allowed"
+          >
+            {loading ? (
+              <>
+                <Loader2 className="size-4 animate-spin" /> Sending...
+              </>
+            ) : (
+              <>
+                <Send className="size-4" /> Send message
+              </>
+            )}
+          </button>
+        </form>
       </div>
     </section>
+  );
+}
+
+function Field({
+  label,
+  value,
+  onChange,
+  placeholder,
+  type = "text",
+  required = false,
+  maxLength,
+}: {
+  label: string;
+  value: string;
+  onChange: (v: string) => void;
+  placeholder?: string;
+  type?: string;
+  required?: boolean;
+  maxLength?: number;
+}) {
+  return (
+    <div>
+      <label className="block text-xs uppercase tracking-widest text-neon mb-2">
+        // {label} {required && <span className="text-pink">*</span>}
+      </label>
+      <input
+        type={type}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        required={required}
+        maxLength={maxLength}
+        className="w-full rounded-md bg-background border border-border px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-neon transition"
+      />
+    </div>
   );
 }
 
