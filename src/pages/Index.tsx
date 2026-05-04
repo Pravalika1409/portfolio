@@ -495,7 +495,9 @@ function Contact() {
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { toast.error("Please enter a valid email address."); return; }
     if (name.length > 100 || email.length > 255 || message.length > 5000) { toast.error("Some fields are too long."); return; }
     setLoading(true);
-    const { error } = await supabase.from("contact_submissions").insert({ name, email, subject: subject || null, message });
+    const { error } = await supabase.functions.invoke("contact-submit", {
+      body: { name, email, subject: subject || null, message },
+    });
     setLoading(false);
     if (error) { toast.error("Could not send your message. Please try again."); return; }
     toast.success("Message sent! I'll get back to you soon.");
