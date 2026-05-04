@@ -7,6 +7,8 @@ import {
   Phone,
   MapPin,
   Download,
+  Eye,
+  X,
   Code2,
   Database,
   Cpu,
@@ -136,12 +138,15 @@ const SKILLS = [
   { name: "Agile/Scrum", color: "var(--neon)" },
 ];
 
+const RESUME_URL = "/Pravalika_Oruganti_Resume.pdf";
+
 export default function Portfolio() {
+  const [resumeOpen, setResumeOpen] = useState(false);
   return (
     <div className="min-h-screen">
       <Header />
       <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-24 space-y-24">
-        <Hero />
+        <Hero onPreviewResume={() => setResumeOpen(true)} />
         <Stats />
         <Services />
         <Experience />
@@ -151,6 +156,51 @@ export default function Portfolio() {
         <Contact />
       </main>
       <Footer />
+      {resumeOpen && <ResumePreview onClose={() => setResumeOpen(false)} />}
+    </div>
+  );
+}
+
+function ResumePreview({ onClose }: { onClose: () => void }) {
+  return (
+    <div
+      className="fixed inset-0 z-50 bg-background/85 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6"
+      onClick={onClose}
+    >
+      <div
+        className="relative w-full max-w-5xl h-[90vh] rounded-xl border border-border bg-card shadow-2xl flex flex-col overflow-hidden"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-center justify-between gap-3 px-4 sm:px-6 py-3 border-b border-border bg-card">
+          <div className="flex items-center gap-2">
+            <span className="text-xs uppercase tracking-widest text-neon">// resume</span>
+            <span className="text-sm text-foreground">Pravalika_Oruganti_Resume.pdf</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <a
+              href={RESUME_URL}
+              download="Pravalika_Oruganti_Resume.pdf"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-neon text-neon-foreground text-sm font-medium hover:opacity-90 transition glow-neon"
+            >
+              <Download className="size-4" />
+              Download
+            </a>
+            <button
+              type="button"
+              onClick={onClose}
+              aria-label="Close preview"
+              className="grid place-items-center size-9 rounded-md border border-border text-foreground hover:border-neon hover:text-neon transition"
+            >
+              <X className="size-4" />
+            </button>
+          </div>
+        </div>
+        <div className="flex-1 bg-background">
+          <object data={`${RESUME_URL}#toolbar=0&navpanes=0`} type="application/pdf" className="w-full h-full">
+            <iframe src={RESUME_URL} title="Resume preview" className="w-full h-full" />
+          </object>
+        </div>
+      </div>
     </div>
   );
 }
@@ -190,7 +240,7 @@ function Header() {
   );
 }
 
-function Hero() {
+function Hero({ onPreviewResume }: { onPreviewResume: () => void }) {
   return (
     <section id="about" className="pt-12 lg:pt-20">
       <div className="rounded-2xl border border-border bg-card/50 px-6 sm:px-10 py-12 lg:py-16 relative overflow-hidden" style={{ backgroundImage: "var(--gradient-hero)" }}>
@@ -234,10 +284,14 @@ function Hero() {
               <span className="px-3 py-1.5 text-sm text-muted-foreground">…and more</span>
             </div>
             <div className="flex flex-wrap items-center gap-4 pt-2">
-              <a href="/Pravalika_Oruganti_Resume.pdf" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 px-5 py-3 rounded-md bg-neon text-neon-foreground font-medium hover:opacity-90 transition glow-neon">
-                <Download className="size-4" />
-                [ Download my CV ]
-              </a>
+              <button
+                type="button"
+                onClick={onPreviewResume}
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-md bg-neon text-neon-foreground font-medium hover:opacity-90 transition glow-neon"
+              >
+                <Eye className="size-4" />
+                [ Preview my CV ]
+              </button>
               <a href="#contact" className="inline-flex items-center gap-2 px-5 py-3 rounded-md border border-border text-foreground hover:border-neon hover:text-neon transition">
                 <Send className="size-4" />
                 Get in touch
