@@ -236,7 +236,7 @@ function Header({ onOpenResume }: { onOpenResume: () => void }) {
           <a href="mailto:Pravalikaoruganti.hsm@gmail.com" className="grid place-items-center size-9 rounded-md border border-border hover:border-neon hover:text-neon transition" aria-label="Email">
             <Mail className="size-4" />
           </a>
-          <a href="#" className="grid place-items-center size-9 rounded-md border border-border hover:border-neon hover:text-neon transition" aria-label="GitHub">
+          <a href="https://github.com/Pravalika1409" target="_blank" rel="noreferrer" className="grid place-items-center size-9 rounded-md border border-border hover:border-neon hover:text-neon transition" aria-label="GitHub">
             <Github className="size-4" />
           </a>
         </div>
