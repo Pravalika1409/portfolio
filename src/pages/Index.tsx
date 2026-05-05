@@ -500,7 +500,7 @@ function Contact() {
       if (!scriptUrl) throw new Error("Contact form endpoint not configured");
       const res = await fetch(scriptUrl, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "text/plain" },
         body: JSON.stringify({ timestamp: new Date().toISOString(), name, email, subject: subject || "", message }),
       });
       if (!res.ok) throw new Error("Request failed");
