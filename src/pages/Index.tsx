@@ -48,8 +48,8 @@ const PROJECTS = [
     title: "Travel Experience",
     description:
       "An immersive travel discovery app — curated destinations, itineraries and a clean, content-rich UI built for inspiration.",
-    tags: ["React", "Vite", "Tailwind", "Lovable"],
-    href: "https://travelexp.lovable.app",
+    tags: ["React", "Vite", "Tailwind"],
+    href: "https://travelexp.lovable.app/",
     accent: "pink",
   },
   {

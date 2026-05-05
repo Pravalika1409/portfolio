@@ -1,5 +1,5 @@
-// Edge function: stores contact submission in DB and appends a row to a Google Sheet
-// via the Lovable connector gateway.
+// Edge function: stores contact submission in DB and appends a row
+// to a Google Sheet via a Google Apps Script web app.
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -7,10 +7,6 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type",
   "Access-Control-Allow-Methods": "POST, OPTIONS",
 };
-
-const SHEET_ID = "1VPYLfl6Teg8LY_p_KzYt7rmeQVI4kduq9eLj5qc4YJI";
-const SHEET_RANGE = "Sheet1!A:E";
-const GATEWAY_URL = "https://connector-gateway.lovable.dev/google_sheets/v4";
 
 interface Payload {
   name?: string;
@@ -90,23 +86,15 @@ Deno.serve(async (req) => {
       });
     }
 
-    // 2. Append to Google Sheet (best-effort, don't fail the whole request)
-    const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
-    const GOOGLE_SHEETS_API_KEY = Deno.env.get("GOOGLE_SHEETS_API_KEY");
-    if (LOVABLE_API_KEY && GOOGLE_SHEETS_API_KEY) {
+    // 2. Append to Google Sheet via Apps Script web app (best-effort)
+    const GOOGLE_SCRIPT_URL = Deno.env.get("GOOGLE_SCRIPT_URL");
+    if (GOOGLE_SCRIPT_URL) {
       try {
         const timestamp = new Date().toISOString();
-        const url = `${GATEWAY_URL}/spreadsheets/${SHEET_ID}/values/${SHEET_RANGE}:append?valueInputOption=USER_ENTERED&insertDataOption=INSERT_ROWS`;
-        const sheetRes = await fetch(url, {
+        const sheetRes = await fetch(GOOGLE_SCRIPT_URL, {
           method: "POST",
-          headers: {
-            Authorization: `Bearer ${LOVABLE_API_KEY}`,
-            "X-Connection-Api-Key": GOOGLE_SHEETS_API_KEY,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            values: [[timestamp, name, email, subject, message]],
-          }),
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ timestamp, name, email, subject, message }),
         });
         if (!sheetRes.ok) {
           const text = await sheetRes.text();
@@ -116,7 +104,7 @@ Deno.serve(async (req) => {
         console.error("Sheet append exception:", e);
       }
     } else {
-      console.warn("Google Sheets credentials missing — skipping sheet append");
+      console.warn("GOOGLE_SCRIPT_URL not set — skipping sheet append");
     }
 
     return new Response(JSON.stringify({ success: true }), {
