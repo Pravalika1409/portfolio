@@ -144,7 +144,7 @@ export default function Portfolio() {
   const [resumeOpen, setResumeOpen] = useState(false);
   return (
     <div className="min-h-screen">
-      <Header />
+      <Header onOpenResume={() => setResumeOpen(true)} />
       <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-24 space-y-24">
         <Hero onPreviewResume={() => setResumeOpen(true)} />
         <Stats />
@@ -205,7 +205,7 @@ function ResumePreview({ onClose }: { onClose: () => void }) {
   );
 }
 
-function Header() {
+function Header({ onOpenResume }: { onOpenResume: () => void }) {
   return (
     <header className="sticky top-0 z-40 backdrop-blur-md bg-background/70 border-b border-border">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between gap-4">
@@ -219,7 +219,12 @@ function Header() {
         </a>
         <nav className="hidden md:flex items-center gap-1">
           {NAV.map((n) => (
-            <a key={n.href} href={n.href} className="px-3 py-2 text-sm text-muted-foreground hover:text-foreground transition">
+            <a
+              key={n.href}
+              href={n.href}
+              onClick={n.label === "Resume" ? (e) => { e.preventDefault(); onOpenResume(); } : undefined}
+              className="px-3 py-2 text-sm text-muted-foreground hover:text-foreground transition"
+            >
               {n.label}
             </a>
           ))}
