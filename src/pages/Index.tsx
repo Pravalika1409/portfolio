@@ -23,7 +23,7 @@ import {
   FolderGit2,
   Loader2,
 } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
+
 import { toast } from "sonner";
 
 const NAV = [
@@ -495,11 +495,21 @@ function Contact() {
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { toast.error("Please enter a valid email address."); return; }
     if (name.length > 100 || email.length > 255 || message.length > 5000) { toast.error("Some fields are too long."); return; }
     setLoading(true);
-    const { error } = await supabase.functions.invoke("contact-submit", {
-      body: { name, email, subject: subject || null, message },
-    });
+    try {
+      const scriptUrl = import.meta.env.VITE_GOOGLE_SCRIPT_URL;
+      if (!scriptUrl) throw new Error("Contact form endpoint not configured");
+      const res = await fetch(scriptUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ timestamp: new Date().toISOString(), name, email, subject: subject || "", message }),
+      });
+      if (!res.ok) throw new Error("Request failed");
+    } catch {
+      setLoading(false);
+      toast.error("Could not send your message. Please try again.");
+      return;
+    }
     setLoading(false);
-    if (error) { toast.error("Could not send your message. Please try again."); return; }
     toast.success("Message sent! I'll get back to you soon.");
     setForm({ name: "", email: "", subject: "", message: "" });
   };
