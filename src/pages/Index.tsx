@@ -239,6 +239,8 @@ export default function Portfolio() {
 }
 
 function ResumePreview({ onClose }: { onClose: () => void }) {
+  const previewUrl = `${RESUME_URL}?v=${Date.now()}`;
+
   return (
     <div
       className="fixed inset-0 z-50 bg-background/85 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6"
@@ -274,11 +276,11 @@ function ResumePreview({ onClose }: { onClose: () => void }) {
         </div>
         <div className="flex-1 bg-background">
           <object
-            data={`${RESUME_URL}#toolbar=0&navpanes=0`}
+            data={`${previewUrl}#toolbar=0&navpanes=0`}
             type="application/pdf"
             className="w-full h-full"
           >
-            <iframe src={RESUME_URL} title="Resume preview" className="w-full h-full" />
+            <iframe src={previewUrl} title="Resume preview" className="w-full h-full" />
           </object>
         </div>
       </div>
