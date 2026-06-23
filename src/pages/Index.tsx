@@ -53,20 +53,63 @@ const PROJECTS = [
     accent: "pink",
   },
   {
-    title: "More project — coming soon",
+    title: "ShopEase",
     description:
-      "Another full-stack project. I'll wire the live link and details here shortly.",
-    tags: ["React", "Node.js", "REST API"],
-    href: "#",
+      "An e-commerce marketplace featuring product filtering, cart management, and checkouts.",
+    tags: ["React", "Vite", "Tailwind CSS"],
+    href: "https://shop.pravalika.dev",
     accent: "yellow",
   },
   {
-    title: "More project — coming soon",
-    description:
-      "Another full-stack project. I'll wire the live link and details here shortly.",
-    tags: ["TypeScript", ".NET", "SQL"],
-    href: "#",
+    title: "WhatsApp Web Clone",
+    description: "High-fidelity frontend clone of WhatsApp Web with messaging simulator.",
+    tags: ["React", "TypeScript", "Tailwind CSS"],
+    href: "https://whatsapp.pravalika.dev",
     accent: "neon",
+  },
+  {
+    title: "Chess Game",
+    description:
+      "An interactive, playable Chess board game with move validation and local multiplayer.",
+    tags: ["React", "TypeScript", "Tailwind CSS"],
+    href: "https://chess.pravalika.dev",
+    accent: "pink",
+  },
+  {
+    title: "LensCraft",
+    description:
+      "Elegant photography portfolio showcasing high-res galleries and masonry grid layouts.",
+    tags: ["React", "Vite", "CSS Grid"],
+    href: "https://photography.pravalika.dev",
+    accent: "neon",
+  },
+  {
+    title: "Bistro Bite",
+    description: "Modern restaurant menu browser featuring reservations and responsive layout.",
+    tags: ["React", "Vite", "Tailwind CSS"],
+    href: "https://restaurant.pravalika.dev",
+    accent: "yellow",
+  },
+  {
+    title: "Ultimate Tic-Tac-Toe",
+    description: "Playable Tic-Tac-Toe game featuring minimax AI for single-player mode.",
+    tags: ["React", "TypeScript", "Tailwind CSS"],
+    href: "https://ttt.pravalika.dev",
+    accent: "pink",
+  },
+  {
+    title: "QR Code Generator",
+    description: "Easy-to-use QR code generator with customization and download options.",
+    tags: ["React", "Vite", "Tailwind CSS"],
+    href: "https://qr.pravalika.dev",
+    accent: "neon",
+  },
+  {
+    title: "Quoteify",
+    description: "Daily quote-generating app with clean styling and Twitter sharing.",
+    tags: ["React", "Vite", "Tailwind CSS"],
+    href: "https://quote.pravalika.dev",
+    accent: "yellow",
   },
 ];
 
@@ -78,12 +121,36 @@ const STATS = [
 ];
 
 const SERVICES = [
-  { Icon: Code2, title: "Web & App Development", text: "Building responsive, accessible interfaces with React, TypeScript, and modern JS frameworks." },
-  { Icon: Database, title: "Database Management", text: "Designing schemas and queries across SQL, MySQL and MongoDB for reliable data flow." },
-  { Icon: Layers, title: "API Development", text: "Crafting RESTful APIs with Node.js and .NET — clean contracts, validation, and error handling." },
-  { Icon: Gauge, title: "Performance Optimization", text: "Refactoring rendering logic and backend interactions to reduce latency and improve UX." },
-  { Icon: Cpu, title: "Full-Stack Solutions", text: "End-to-end features — UI to API to database — built for scale, maintainability, and Agile teams." },
-  { Icon: Sparkles, title: "Code Reviews & QA", text: "Collaborating in code reviews, debugging, and CI/CD release processes for stable shipping." },
+  {
+    Icon: Code2,
+    title: "Web & App Development",
+    text: "Building responsive, accessible interfaces with React, TypeScript, and modern JS frameworks.",
+  },
+  {
+    Icon: Database,
+    title: "Database Management",
+    text: "Designing schemas and queries across SQL, MySQL and MongoDB for reliable data flow.",
+  },
+  {
+    Icon: Layers,
+    title: "API Development",
+    text: "Crafting RESTful APIs with Node.js and .NET — clean contracts, validation, and error handling.",
+  },
+  {
+    Icon: Gauge,
+    title: "Performance Optimization",
+    text: "Refactoring rendering logic and backend interactions to reduce latency and improve UX.",
+  },
+  {
+    Icon: Cpu,
+    title: "Full-Stack Solutions",
+    text: "End-to-end features — UI to API to database — built for scale, maintainability, and Agile teams.",
+  },
+  {
+    Icon: Sparkles,
+    title: "Code Reviews & QA",
+    text: "Collaborating in code reviews, debugging, and CI/CD release processes for stable shipping.",
+  },
 ];
 
 const EXPERIENCE = [
@@ -115,8 +182,18 @@ const EXPERIENCE = [
 ];
 
 const EDUCATION = [
-  { period: "Jan 2024 — May 2025", school: "Conestoga College", degree: "Post Graduate Diploma in Web Development", location: "Ontario, Canada" },
-  { period: "Jul 2017 — Aug 2021", school: "JNTUH", degree: "B.Tech in Computer Science Engineering", location: "Hyderabad, India" },
+  {
+    period: "Jan 2024 — May 2025",
+    school: "Conestoga College",
+    degree: "Post Graduate Diploma in Web Development",
+    location: "Ontario, Canada",
+  },
+  {
+    period: "Jul 2017 — Aug 2021",
+    school: "JNTUH",
+    degree: "B.Tech in Computer Science Engineering",
+    location: "Hyderabad, India",
+  },
 ];
 
 const SKILLS = [
@@ -196,7 +273,11 @@ function ResumePreview({ onClose }: { onClose: () => void }) {
           </div>
         </div>
         <div className="flex-1 bg-background">
-          <object data={`${RESUME_URL}#toolbar=0&navpanes=0`} type="application/pdf" className="w-full h-full">
+          <object
+            data={`${RESUME_URL}#toolbar=0&navpanes=0`}
+            type="application/pdf"
+            className="w-full h-full"
+          >
             <iframe src={RESUME_URL} title="Resume preview" className="w-full h-full" />
           </object>
         </div>
@@ -222,7 +303,14 @@ function Header({ onOpenResume }: { onOpenResume: () => void }) {
             <a
               key={n.href}
               href={n.href}
-              onClick={n.label === "Resume" ? (e) => { e.preventDefault(); onOpenResume(); } : undefined}
+              onClick={
+                n.label === "Resume"
+                  ? (e) => {
+                      e.preventDefault();
+                      onOpenResume();
+                    }
+                  : undefined
+              }
               className="px-3 py-2 text-sm text-muted-foreground hover:text-foreground transition"
             >
               {n.label}
@@ -230,13 +318,29 @@ function Header({ onOpenResume }: { onOpenResume: () => void }) {
           ))}
         </nav>
         <div className="flex items-center gap-2">
-          <a href="https://www.linkedin.com/in/pravalikaoruganti" target="_blank" rel="noreferrer" className="grid place-items-center size-9 rounded-md border border-border hover:border-neon hover:text-neon transition" aria-label="LinkedIn">
+          <a
+            href="https://www.linkedin.com/in/pravalikaoruganti"
+            target="_blank"
+            rel="noreferrer"
+            className="grid place-items-center size-9 rounded-md border border-border hover:border-neon hover:text-neon transition"
+            aria-label="LinkedIn"
+          >
             <Linkedin className="size-4" />
           </a>
-          <a href="mailto:Pravalikaoruganti.hsm@gmail.com" className="grid place-items-center size-9 rounded-md border border-border hover:border-neon hover:text-neon transition" aria-label="Email">
+          <a
+            href="mailto:Pravalikaoruganti.hsm@gmail.com"
+            className="grid place-items-center size-9 rounded-md border border-border hover:border-neon hover:text-neon transition"
+            aria-label="Email"
+          >
             <Mail className="size-4" />
           </a>
-          <a href="https://github.com/Pravalika1409" target="_blank" rel="noreferrer" className="grid place-items-center size-9 rounded-md border border-border hover:border-neon hover:text-neon transition" aria-label="GitHub">
+          <a
+            href="https://github.com/Pravalika1409"
+            target="_blank"
+            rel="noreferrer"
+            className="grid place-items-center size-9 rounded-md border border-border hover:border-neon hover:text-neon transition"
+            aria-label="GitHub"
+          >
             <Github className="size-4" />
           </a>
         </div>
@@ -248,13 +352,20 @@ function Header({ onOpenResume }: { onOpenResume: () => void }) {
 function Hero({ onPreviewResume }: { onPreviewResume: () => void }) {
   return (
     <section id="about" className="pt-12 lg:pt-20">
-      <div className="rounded-2xl border border-border bg-card/50 px-6 sm:px-10 py-12 lg:py-16 relative overflow-hidden" style={{ backgroundImage: "var(--gradient-hero)" }}>
+      <div
+        className="rounded-2xl border border-border bg-card/50 px-6 sm:px-10 py-12 lg:py-16 relative overflow-hidden"
+        style={{ backgroundImage: "var(--gradient-hero)" }}
+      >
         <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" />
         <div className="relative grid lg:grid-cols-2 gap-12 items-center">
           <div className="flex justify-center order-2 lg:order-1">
             <div className="relative">
               <div className="hex-clip overflow-hidden size-72 sm:size-96 bg-gradient-to-br from-neon/30 via-violet/20 to-pink/20 p-1 float-slow">
-                <img src={profile} alt="Pravalika Oruganti" className="hex-clip size-full object-cover" />
+                <img
+                  src={profile}
+                  alt="Pravalika Oruganti"
+                  className="hex-clip size-full object-cover"
+                />
               </div>
               <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 grid place-items-center size-16 rounded-2xl bg-neon text-neon-foreground glow-neon">
                 <Code2 className="size-8" />
@@ -274,17 +385,22 @@ function Hero({ onPreviewResume }: { onPreviewResume: () => void }) {
               <span className="caret-blink" />
             </h1>
             <p className="text-muted-foreground leading-relaxed max-w-xl">
-              <span className="text-pink">&lt;p&gt;</span>
-              {" "}With 2+ years building scalable, API-driven web applications using{" "}
-              <span className="text-neon">React</span>,{" "}
+              <span className="text-pink">&lt;p&gt;</span> With 2+ years building scalable,
+              API-driven web applications using <span className="text-neon">React</span>,{" "}
               <span className="text-neon">Node.js</span>,{" "}
               <span className="text-neon">TypeScript</span> and{" "}
-              <span className="text-neon">.NET</span>… I deliver clean, reliable, user-focused solutions.
+              <span className="text-neon">.NET</span>… I deliver clean, reliable, user-focused
+              solutions.
               <span className="text-pink"> &lt;/p&gt;</span>
             </p>
             <div className="flex flex-wrap gap-2">
               {["React", "Node.js", "TypeScript", ".NET", "MongoDB"].map((s) => (
-                <span key={s} className="px-3 py-1.5 rounded-md bg-secondary text-sm text-foreground border border-border">{s}</span>
+                <span
+                  key={s}
+                  className="px-3 py-1.5 rounded-md bg-secondary text-sm text-foreground border border-border"
+                >
+                  {s}
+                </span>
               ))}
               <span className="px-3 py-1.5 text-sm text-muted-foreground">…and more</span>
             </div>
@@ -294,10 +410,12 @@ function Hero({ onPreviewResume }: { onPreviewResume: () => void }) {
                 onClick={onPreviewResume}
                 className="inline-flex items-center gap-2 px-5 py-3 rounded-md bg-neon text-neon-foreground font-medium hover:opacity-90 transition glow-neon"
               >
-                <Eye className="size-4" />
-                [ Preview my CV ]
+                <Eye className="size-4" />[ Preview my CV ]
               </button>
-              <a href="#contact" className="inline-flex items-center gap-2 px-5 py-3 rounded-md border border-border text-foreground hover:border-neon hover:text-neon transition">
+              <a
+                href="#contact"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-md border border-border text-foreground hover:border-neon hover:text-neon transition"
+              >
                 <Send className="size-4" />
                 Get in touch
               </a>
@@ -313,7 +431,10 @@ function Stats() {
   return (
     <section className="grid grid-cols-2 lg:grid-cols-4 gap-4">
       {STATS.map(({ value, label, Icon }) => (
-        <div key={label} className="rounded-xl border border-border bg-card p-6 hover:border-neon transition">
+        <div
+          key={label}
+          className="rounded-xl border border-border bg-card p-6 hover:border-neon transition"
+        >
           <Icon className="size-6 text-neon mb-4" />
           <div className="text-3xl sm:text-4xl font-bold text-foreground">{value}</div>
           <div className="text-sm text-muted-foreground mt-1">{label}</div>
@@ -335,10 +456,20 @@ function SectionHeader({ tag, title }: { tag: string; title: React.ReactNode }) 
 function Services() {
   return (
     <section id="services">
-      <SectionHeader tag="services" title={<>Designing <span className="text-neon">solutions</span> tailored to your requirements</>} />
+      <SectionHeader
+        tag="services"
+        title={
+          <>
+            Designing <span className="text-neon">solutions</span> tailored to your requirements
+          </>
+        }
+      />
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {SERVICES.map(({ Icon, title, text }) => (
-          <div key={title} className="group rounded-xl border border-border bg-card p-6 hover:border-neon hover:-translate-y-1 transition">
+          <div
+            key={title}
+            className="group rounded-xl border border-border bg-card p-6 hover:border-neon hover:-translate-y-1 transition"
+          >
             <div className="grid place-items-center size-11 rounded-md bg-secondary text-neon mb-4 group-hover:bg-neon group-hover:text-neon-foreground transition">
               <Icon className="size-5" />
             </div>
@@ -354,25 +485,45 @@ function Services() {
 function Experience() {
   return (
     <section id="resume">
-      <SectionHeader tag="experience" title={<><span className="text-neon">2+</span> years building production web applications</>} />
+      <SectionHeader
+        tag="experience"
+        title={
+          <>
+            <span className="text-neon">2+</span> years building production web applications
+          </>
+        }
+      />
       <div className="space-y-4">
         {EXPERIENCE.map((e) => (
-          <div key={e.role + e.company} className="rounded-xl border border-border bg-card p-6 sm:p-8 hover:border-neon transition">
+          <div
+            key={e.role + e.company}
+            className="rounded-xl border border-border bg-card p-6 sm:p-8 hover:border-neon transition"
+          >
             <div className="flex flex-wrap items-start justify-between gap-3 mb-4">
               <div>
-                <h3 className="text-xl font-semibold text-foreground">{e.role} <span className="text-neon">@ {e.company}</span></h3>
+                <h3 className="text-xl font-semibold text-foreground">
+                  {e.role} <span className="text-neon">@ {e.company}</span>
+                </h3>
                 <p className="text-sm text-muted-foreground mt-1">{e.period}</p>
               </div>
               <Briefcase className="size-5 text-neon" />
             </div>
             <ul className="space-y-2 text-sm text-muted-foreground">
               {e.bullets.map((b) => (
-                <li key={b} className="flex gap-3"><span className="text-neon mt-1">▸</span><span className="leading-relaxed">{b}</span></li>
+                <li key={b} className="flex gap-3">
+                  <span className="text-neon mt-1">▸</span>
+                  <span className="leading-relaxed">{b}</span>
+                </li>
               ))}
             </ul>
             <div className="flex flex-wrap gap-2 mt-5">
               {e.stack.map((s) => (
-                <span key={s} className="px-2.5 py-1 text-xs rounded-md bg-secondary text-foreground border border-border">{s}</span>
+                <span
+                  key={s}
+                  className="px-2.5 py-1 text-xs rounded-md bg-secondary text-foreground border border-border"
+                >
+                  {s}
+                </span>
               ))}
             </div>
           </div>
@@ -385,10 +536,20 @@ function Experience() {
 function Education() {
   return (
     <section>
-      <SectionHeader tag="education" title={<><span className="text-neon">Continuous</span> learning, here&apos;s the paper trail</>} />
+      <SectionHeader
+        tag="education"
+        title={
+          <>
+            <span className="text-neon">Continuous</span> learning, here&apos;s the paper trail
+          </>
+        }
+      />
       <div className="grid md:grid-cols-2 gap-4">
         {EDUCATION.map((ed) => (
-          <div key={ed.school} className="rounded-xl border border-border bg-card p-6 hover:border-neon transition">
+          <div
+            key={ed.school}
+            className="rounded-xl border border-border bg-card p-6 hover:border-neon transition"
+          >
             <div className="flex items-center gap-3 mb-3">
               <GraduationCap className="size-6 text-neon" />
               <span className="text-xs text-muted-foreground">{ed.period}</span>
@@ -405,7 +566,9 @@ function Education() {
           </div>
           <h3 className="font-semibold text-foreground">Smart India Hackathon — Participant</h3>
           <p className="text-sm text-muted-foreground mt-2 leading-relaxed">
-            Built a web portal connecting educational orphanages with underprivileged children through smart-TV–based content delivery. Focused on accessibility, intuitive UX, and meaningful social impact.
+            Built a web portal connecting educational orphanages with underprivileged children
+            through smart-TV–based content delivery. Focused on accessibility, intuitive UX, and
+            meaningful social impact.
           </p>
         </div>
       </div>
@@ -416,11 +579,21 @@ function Education() {
 function Skills() {
   return (
     <section id="skills">
-      <SectionHeader tag="skills" title={<>My <span className="text-neon">technical</span> stack</>} />
+      <SectionHeader
+        tag="skills"
+        title={
+          <>
+            My <span className="text-neon">technical</span> stack
+          </>
+        }
+      />
       <div className="rounded-xl border border-border bg-card p-6 sm:p-8">
         <div className="flex flex-wrap gap-3">
           {SKILLS.map((s) => (
-            <span key={s.name} className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-secondary border border-border hover:border-neon transition">
+            <span
+              key={s.name}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-secondary border border-border hover:border-neon transition"
+            >
               <span className="size-1.5 rounded-full" style={{ backgroundColor: s.color }} />
               <span className="text-sm text-foreground">{s.name}</span>
             </span>
@@ -431,7 +604,10 @@ function Skills() {
           <SkillGroup title="Back-End" items="Node.js, .NET, C#, REST APIs" />
           <SkillGroup title="Databases" items="SQL, MySQL, MongoDB" />
           <SkillGroup title="Tools" items="Git, CI/CD, VS Code, Figma" />
-          <SkillGroup title="Practices" items="Agile/Scrum, Code Reviews, Debugging, Performance Optimization" />
+          <SkillGroup
+            title="Practices"
+            items="Agile/Scrum, Code Reviews, Debugging, Performance Optimization"
+          />
           <SkillGroup title="Design" items="Figma, Adobe Creative Suite, Responsive Design" />
         </div>
       </div>
@@ -451,13 +627,27 @@ function SkillGroup({ title, items }: { title: string; items: string }) {
 function Projects() {
   return (
     <section id="projects">
-      <SectionHeader tag="projects" title={<>Selected <span className="text-neon">projects</span> I&apos;ve shipped</>} />
+      <SectionHeader
+        tag="projects"
+        title={
+          <>
+            Selected <span className="text-neon">projects</span> I&apos;ve shipped
+          </>
+        }
+      />
       <div className="grid md:grid-cols-2 gap-5">
         {PROJECTS.map((p, i) => {
           const isLive = p.href.startsWith("http");
-          const accentClass = p.accent === "pink" ? "text-pink" : p.accent === "yellow" ? "text-yellow" : "text-neon";
+          const accentClass =
+            p.accent === "pink" ? "text-pink" : p.accent === "yellow" ? "text-yellow" : "text-neon";
           return (
-            <a key={i} href={isLive ? p.href : undefined} target={isLive ? "_blank" : undefined} rel="noreferrer" className={`group relative rounded-xl border border-border bg-card p-6 transition hover:-translate-y-1 ${isLive ? "hover:border-neon cursor-pointer" : "opacity-80"}`}>
+            <a
+              key={i}
+              href={isLive ? p.href : undefined}
+              target={isLive ? "_blank" : undefined}
+              rel="noreferrer"
+              className={`group relative rounded-xl border border-border bg-card p-6 transition hover:-translate-y-1 ${isLive ? "hover:border-neon cursor-pointer" : "opacity-80"}`}
+            >
               <div className="flex items-start justify-between gap-4 mb-4">
                 <div className="grid place-items-center size-10 rounded-md bg-secondary">
                   <FolderGit2 className={`size-5 ${accentClass}`} />
@@ -474,7 +664,12 @@ function Projects() {
               <p className="text-sm text-muted-foreground leading-relaxed mb-4">{p.description}</p>
               <div className="flex flex-wrap gap-2">
                 {p.tags.map((t) => (
-                  <span key={t} className="text-[11px] font-mono px-2 py-1 rounded border border-border text-muted-foreground">{t}</span>
+                  <span
+                    key={t}
+                    className="text-[11px] font-mono px-2 py-1 rounded border border-border text-muted-foreground"
+                  >
+                    {t}
+                  </span>
                 ))}
               </div>
             </a>
@@ -496,9 +691,18 @@ function Contact() {
     const email = form.email.trim();
     const subject = form.subject.trim();
     const message = form.message.trim();
-    if (!name || !email || !message) { toast.error("Please fill in your name, email and message."); return; }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { toast.error("Please enter a valid email address."); return; }
-    if (name.length > 100 || email.length > 255 || message.length > 5000) { toast.error("Some fields are too long."); return; }
+    if (!name || !email || !message) {
+      toast.error("Please fill in your name, email and message.");
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      toast.error("Please enter a valid email address.");
+      return;
+    }
+    if (name.length > 100 || email.length > 255 || message.length > 5000) {
+      toast.error("Some fields are too long.");
+      return;
+    }
     setLoading(true);
     try {
       const scriptUrl = import.meta.env.VITE_GOOGLE_SCRIPT_URL;
@@ -506,7 +710,13 @@ function Contact() {
       const res = await fetch(scriptUrl, {
         method: "POST",
         headers: { "Content-Type": "text/plain" },
-        body: JSON.stringify({ timestamp: new Date().toISOString(), name, email, subject: subject || "", message }),
+        body: JSON.stringify({
+          timestamp: new Date().toISOString(),
+          name,
+          email,
+          subject: subject || "",
+          message,
+        }),
       });
       if (!res.ok) throw new Error("Request failed");
     } catch {
@@ -521,40 +731,113 @@ function Contact() {
 
   return (
     <section id="contact">
-      <SectionHeader tag="contact" title={<>Let&apos;s <span className="text-neon">connect</span> and build something great</>} />
+      <SectionHeader
+        tag="contact"
+        title={
+          <>
+            Let&apos;s <span className="text-neon">connect</span> and build something great
+          </>
+        }
+      />
       <div className="grid lg:grid-cols-3 gap-4 mb-6">
-        <ContactCard Icon={Mail} label="Email" value="Pravalikaoruganti.hsm@gmail.com" href="mailto:Pravalikaoruganti.hsm@gmail.com" />
+        <ContactCard
+          Icon={Mail}
+          label="Email"
+          value="Pravalikaoruganti.hsm@gmail.com"
+          href="mailto:Pravalikaoruganti.hsm@gmail.com"
+        />
         <ContactCard Icon={Phone} label="Phone" value="+1 382-885-7999" href="tel:+13828857999" />
-        <ContactCard Icon={Linkedin} label="LinkedIn" value="/in/pravalikaoruganti" href="https://www.linkedin.com/in/pravalikaoruganti" />
+        <ContactCard
+          Icon={Linkedin}
+          label="LinkedIn"
+          value="/in/pravalikaoruganti"
+          href="https://www.linkedin.com/in/pravalikaoruganti"
+        />
       </div>
       <div className="grid lg:grid-cols-5 gap-6">
         <div className="lg:col-span-2 rounded-xl border border-border bg-card p-6 sm:p-8 flex flex-col justify-between">
           <div>
             <div className="flex items-center gap-3 mb-4">
               <MapPin className="size-5 text-neon" />
-              <p className="font-semibold text-foreground">Open to opportunities — Canada & remote</p>
+              <p className="font-semibold text-foreground">
+                Open to opportunities — Canada & remote
+              </p>
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              I&apos;m excited to take on new projects and collaborate with great teams. Drop me a message and I&apos;ll respond within a day or two.
+              I&apos;m excited to take on new projects and collaborate with great teams. Drop me a
+              message and I&apos;ll respond within a day or two.
             </p>
           </div>
           <div className="mt-6 font-mono text-xs text-muted-foreground space-y-1">
-            <div><span className="text-pink">const</span> <span className="text-neon">response_time</span> = <span className="text-yellow">&quot;~24h&quot;</span>;</div>
-            <div><span className="text-pink">const</span> <span className="text-neon">timezone</span> = <span className="text-yellow">&quot;EST / America/Toronto&quot;</span>;</div>
+            <div>
+              <span className="text-pink">const</span>{" "}
+              <span className="text-neon">response_time</span> ={" "}
+              <span className="text-yellow">&quot;~24h&quot;</span>;
+            </div>
+            <div>
+              <span className="text-pink">const</span> <span className="text-neon">timezone</span> ={" "}
+              <span className="text-yellow">&quot;EST / America/Toronto&quot;</span>;
+            </div>
           </div>
         </div>
-        <form onSubmit={handleSubmit} className="lg:col-span-3 rounded-xl border border-border bg-card p-6 sm:p-8 space-y-4">
+        <form
+          onSubmit={handleSubmit}
+          className="lg:col-span-3 rounded-xl border border-border bg-card p-6 sm:p-8 space-y-4"
+        >
           <div className="grid sm:grid-cols-2 gap-4">
-            <Field label="Name" required value={form.name} onChange={(v) => setForm((f) => ({ ...f, name: v }))} placeholder="Your name" maxLength={100} />
-            <Field label="Email" required type="email" value={form.email} onChange={(v) => setForm((f) => ({ ...f, email: v }))} placeholder="you@example.com" maxLength={255} />
+            <Field
+              label="Name"
+              required
+              value={form.name}
+              onChange={(v) => setForm((f) => ({ ...f, name: v }))}
+              placeholder="Your name"
+              maxLength={100}
+            />
+            <Field
+              label="Email"
+              required
+              type="email"
+              value={form.email}
+              onChange={(v) => setForm((f) => ({ ...f, email: v }))}
+              placeholder="you@example.com"
+              maxLength={255}
+            />
           </div>
-          <Field label="Subject" value={form.subject} onChange={(v) => setForm((f) => ({ ...f, subject: v }))} placeholder="What's this about?" maxLength={200} />
+          <Field
+            label="Subject"
+            value={form.subject}
+            onChange={(v) => setForm((f) => ({ ...f, subject: v }))}
+            placeholder="What's this about?"
+            maxLength={200}
+          />
           <div>
-            <label className="block text-xs uppercase tracking-widest text-neon mb-2">// Message <span className="text-pink">*</span></label>
-            <textarea required value={form.message} onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))} maxLength={5000} rows={6} placeholder="Tell me about your project, role or idea..." className="w-full rounded-md bg-background border border-border px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-neon transition resize-none" />
+            <label className="block text-xs uppercase tracking-widest text-neon mb-2">
+              // Message <span className="text-pink">*</span>
+            </label>
+            <textarea
+              required
+              value={form.message}
+              onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
+              maxLength={5000}
+              rows={6}
+              placeholder="Tell me about your project, role or idea..."
+              className="w-full rounded-md bg-background border border-border px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-neon transition resize-none"
+            />
           </div>
-          <button type="submit" disabled={loading} className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-md bg-neon text-neon-foreground font-medium hover:opacity-90 transition glow-neon disabled:opacity-60 disabled:cursor-not-allowed">
-            {loading ? (<><Loader2 className="size-4 animate-spin" /> Sending...</>) : (<><Send className="size-4" /> Send message</>)}
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-md bg-neon text-neon-foreground font-medium hover:opacity-90 transition glow-neon disabled:opacity-60 disabled:cursor-not-allowed"
+          >
+            {loading ? (
+              <>
+                <Loader2 className="size-4 animate-spin" /> Sending...
+              </>
+            ) : (
+              <>
+                <Send className="size-4" /> Send message
+              </>
+            )}
           </button>
         </form>
       </div>
@@ -562,18 +845,59 @@ function Contact() {
   );
 }
 
-function Field({ label, value, onChange, placeholder, type = "text", required = false, maxLength }: { label: string; value: string; onChange: (v: string) => void; placeholder?: string; type?: string; required?: boolean; maxLength?: number; }) {
+function Field({
+  label,
+  value,
+  onChange,
+  placeholder,
+  type = "text",
+  required = false,
+  maxLength,
+}: {
+  label: string;
+  value: string;
+  onChange: (v: string) => void;
+  placeholder?: string;
+  type?: string;
+  required?: boolean;
+  maxLength?: number;
+}) {
   return (
     <div>
-      <label className="block text-xs uppercase tracking-widest text-neon mb-2">// {label} {required && <span className="text-pink">*</span>}</label>
-      <input type={type} value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder} required={required} maxLength={maxLength} className="w-full rounded-md bg-background border border-border px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-neon transition" />
+      <label className="block text-xs uppercase tracking-widest text-neon mb-2">
+        // {label} {required && <span className="text-pink">*</span>}
+      </label>
+      <input
+        type={type}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        required={required}
+        maxLength={maxLength}
+        className="w-full rounded-md bg-background border border-border px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-neon transition"
+      />
     </div>
   );
 }
 
-function ContactCard({ Icon, label, value, href }: { Icon: typeof Mail; label: string; value: string; href: string; }) {
+function ContactCard({
+  Icon,
+  label,
+  value,
+  href,
+}: {
+  Icon: typeof Mail;
+  label: string;
+  value: string;
+  href: string;
+}) {
   return (
-    <a href={href} target={href.startsWith("http") ? "_blank" : undefined} rel="noreferrer" className="group rounded-xl border border-border bg-card p-6 hover:border-neon hover:-translate-y-1 transition flex items-center gap-4">
+    <a
+      href={href}
+      target={href.startsWith("http") ? "_blank" : undefined}
+      rel="noreferrer"
+      className="group rounded-xl border border-border bg-card p-6 hover:border-neon hover:-translate-y-1 transition flex items-center gap-4"
+    >
       <div className="grid place-items-center size-11 rounded-md bg-secondary text-neon group-hover:bg-neon group-hover:text-neon-foreground transition">
         <Icon className="size-5" />
       </div>
@@ -590,8 +914,15 @@ function Footer() {
   return (
     <footer className="border-t border-border">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 flex flex-wrap items-center justify-between gap-4 text-sm text-muted-foreground">
-        <p>© {new Date().getFullYear()} <span className="text-foreground">Pravalika Oruganti</span>. Built with <span className="text-neon">React</span> + <span className="text-neon">Vite</span>.</p>
-        <p className="font-mono"><span className="text-pink">const</span> <span className="text-neon">status</span> = <span className="text-yellow">&quot;available_for_hire&quot;</span>;</p>
+        <p>
+          © {new Date().getFullYear()} <span className="text-foreground">Pravalika Oruganti</span>.
+          Built with <span className="text-neon">React</span> +{" "}
+          <span className="text-neon">Vite</span>.
+        </p>
+        <p className="font-mono">
+          <span className="text-pink">const</span> <span className="text-neon">status</span> ={" "}
+          <span className="text-yellow">&quot;available_for_hire&quot;</span>;
+        </p>
       </div>
     </footer>
   );
